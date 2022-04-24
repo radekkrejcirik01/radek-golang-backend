@@ -1,0 +1,21 @@
+name: radek-golang-backend
+services:
+- name: web
+  github:
+    repo: radekkrejcirik01/radek-golang-backend
+    branch: main
+  envs:
+  - key: DBHOST
+    value: ${db.DBHOST}
+  - key: DBPORT
+    value: ${db.DBPORT}
+  - key: DBUSER
+    value: ${db.DBUSER}
+  - key: DBPASSWORD
+    value: ${db.DBPASSWORD}
+  - key: DBNAME
+    value: ${db.DBNAME}
+databases:
+- name: db
+  engine: PG
+  version: "12"
