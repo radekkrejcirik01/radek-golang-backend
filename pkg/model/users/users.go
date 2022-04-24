@@ -32,7 +32,7 @@ func ReadAll(db *gorm.DB, t *[]USERS) error {
 
 // Update USERS in DB
 func Update(db *gorm.DB, t *USERS) error {
-	return db.Where("id = 32").Save(t).Error
+	return db.Where("id = 32").Update("username").Error
 }
 
 // Delete USERS from DB
