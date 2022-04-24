@@ -6,8 +6,8 @@ import (
 	"github.com/radekkrejcirik01/radek-golang-backend/pkg/model/users"
 )
 
-// UsersGet GET /users
-func UsersGet(c *fiber.Ctx) error {
+// UserGet GET /users/:id
+func UserGet(c *fiber.Ctx) error {
 	id := c.Params("id")
 	t := &users.USERS{}
 	if err := users.Read(database.DB, t, id); err != nil {
@@ -22,6 +22,7 @@ func UsersGet(c *fiber.Ctx) error {
 	})
 }
 
+// UserGetAll GET /users
 func UsersGetAll(c *fiber.Ctx) error {
 	t := &[]users.USERS{}
 	if err := users.ReadAll(database.DB, t); err != nil {
@@ -36,8 +37,8 @@ func UsersGetAll(c *fiber.Ctx) error {
 	})
 }
 
-// UsersPost POST /users
-func UsersPost(c *fiber.Ctx) error {
+// UserPost POST /users
+func UserPost(c *fiber.Ctx) error {
 	t := &users.USERS{}
 	if err := c.BodyParser(t); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(resp{
@@ -54,8 +55,8 @@ func UsersPost(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
 }
 
-// UsersPut PUT /users
-func UsersPut(c *fiber.Ctx) error {
+// UserPut PUT /users
+func UserPut(c *fiber.Ctx) error {
 	t := &users.USERS{}
 	if err := c.BodyParser(t); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(resp{
@@ -72,10 +73,10 @@ func UsersPut(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
 }
 
-// UsersDel DELETE /users/:id
-func UsersDel(c *fiber.Ctx) error {
+// UserDel DELETE /users/:id
+func UserDel(c *fiber.Ctx) error {
 	id := c.Params("id")
-	if err := users.DeleteByID(database.DB, id); err != nil {
+	if err := users.DeleteById(database.DB, id); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(resp{
 			Status:  "error",
 			Message: err.Error(),

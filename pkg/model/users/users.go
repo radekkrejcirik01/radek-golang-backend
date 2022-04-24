@@ -41,7 +41,7 @@ func Delete(db *gorm.DB, t *USERS) error {
 }
 
 // DeleteByID one USERS by ID
-func DeleteByID(db *gorm.DB, id string) error {
+func DeleteById(db *gorm.DB, id string) error {
 	users := &USERS{}
 	if err := Read(db, users, id); err != nil {
 		return err

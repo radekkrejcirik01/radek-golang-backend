@@ -10,11 +10,11 @@ func Create() *fiber.App {
 	app := fiber.New()
 
 	app.Get("/", controller.Index)
-	app.Get("/users/:id", controller.UsersGet)
+	app.Get("/users/:id", controller.UserGet)
 	app.Get("/users", controller.UsersGetAll)
-	app.Post("/users", controller.UsersPost)
-	app.Put("/users", controller.UsersPut)
-	app.Delete("/users", controller.UsersDel)
+	app.Post("/users", controller.UserPost)
+	app.Put("/users", controller.UserPut)
+	app.Delete("/users/:id", controller.UserDel)
 	app.Get("/config", controller.Config)
 
 	return app
