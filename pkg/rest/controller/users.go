@@ -30,7 +30,10 @@ func UsersGetAll(c *fiber.Ctx) error {
 			Message: err.Error(),
 		})
 	}
-	return c.JSON(t)
+	return c.Status(fiber.StatusOK).JSON(resp{
+		Status: "ok",
+		Data:   t,
+	})
 }
 
 // UsersPost POST /users
