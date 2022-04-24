@@ -1,4 +1,4 @@
-# my-golang-backend
+# radek-golang-backend
 My repository for Golang projects
 
 ## DONE
