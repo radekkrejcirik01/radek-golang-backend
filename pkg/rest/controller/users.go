@@ -52,7 +52,10 @@ func UserPost(c *fiber.Ctx) error {
 			Message: err.Error(),
 		})
 	}
-	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
+	return c.Status(fiber.StatusInternalServerError).JSON(resp{
+		Status:  "succes",
+		Message: "User succesfully registered!",
+	})
 }
 
 // UserPut PUT /users
@@ -70,7 +73,10 @@ func UserPut(c *fiber.Ctx) error {
 			Message: err.Error(),
 		})
 	}
-	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
+	return c.Status(fiber.StatusInternalServerError).JSON(resp{
+		Status:  "succes",
+		Message: "User succesfully updated!",
+	})
 }
 
 // UserDel DELETE /users/:id
@@ -82,7 +88,10 @@ func UserDel(c *fiber.Ctx) error {
 			Message: err.Error(),
 		})
 	}
-	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
+	return c.Status(fiber.StatusInternalServerError).JSON(resp{
+		Status:  "succes",
+		Message: "User succesfully deleted!",
+	})
 }
 
 // UserLogin AUTHENTICATE /login
@@ -102,6 +111,6 @@ func UserLogin(c *fiber.Ctx) error {
 	}
 	return c.Status(fiber.StatusInternalServerError).JSON(resp{
 		Status:  "succes",
-		Message: "User exists!",
+		Message: "User succesfully authenticated!",
 	})
 }
