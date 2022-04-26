@@ -37,27 +37,6 @@ func UsersGetAll(c *fiber.Ctx) error {
 	})
 }
 
-// UserPost POST /users
-func UserPost(c *fiber.Ctx) error {
-	t := &users.USERS{}
-	if err := c.BodyParser(t); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(resp{
-			Status:  "error",
-			Message: err.Error(),
-		})
-	}
-	if err := users.Create(database.DB, t); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(resp{
-			Status:  "error",
-			Message: err.Error(),
-		})
-	}
-	return c.Status(fiber.StatusInternalServerError).JSON(resp{
-		Status:  "succes",
-		Message: "User succesfully registered!",
-	})
-}
-
 // UserPut PUT /users
 func UserPut(c *fiber.Ctx) error {
 	t := &users.USERS{}
@@ -91,6 +70,27 @@ func UserDel(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusInternalServerError).JSON(resp{
 		Status:  "succes",
 		Message: "User succesfully deleted!",
+	})
+}
+
+// UserRegister POST /users/register
+func UserRegister(c *fiber.Ctx) error {
+	t := &users.USERS{}
+	if err := c.BodyParser(t); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(resp{
+			Status:  "error",
+			Message: err.Error(),
+		})
+	}
+	if err := users.Create(database.DB, t); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(resp{
+			Status:  "error",
+			Message: err.Error(),
+		})
+	}
+	return c.Status(fiber.StatusInternalServerError).JSON(resp{
+		Status:  "succes",
+		Message: "User succesfully registered!",
 	})
 }
 
