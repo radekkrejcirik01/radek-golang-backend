@@ -50,6 +50,7 @@ func DeleteById(db *gorm.DB, id string) error {
 
 }
 
+// Login authenticate user
 func Login(db *gorm.DB, t *USERS) error {
 	return db.Where("username = ? AND password = ?", t.Username, t.Password).First(t).Error
 }

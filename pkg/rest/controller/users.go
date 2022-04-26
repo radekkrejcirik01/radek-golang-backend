@@ -100,5 +100,8 @@ func UserLogin(c *fiber.Ctx) error {
 			Message: err.Error(),
 		})
 	}
-	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
+	return c.Status(fiber.StatusInternalServerError).JSON(resp{
+		Status:  "succes",
+		Message: "User exists!",
+	})
 }
