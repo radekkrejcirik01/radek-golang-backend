@@ -84,3 +84,17 @@ func UserDel(c *fiber.Ctx) error {
 	}
 	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
 }
+
+func UserLogin(c *fiber.Ctx) error {
+	t := &users.USERS{}
+	if err := users.Login(database.DB, t); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(resp{
+			Status:  "error",
+			Message: err.Error(),
+		})
+	}
+	return c.Status(fiber.StatusOK).JSON(resp{
+		Status: "ok",
+		Data:   &[]users.USERS{*t},
+	})
+}
