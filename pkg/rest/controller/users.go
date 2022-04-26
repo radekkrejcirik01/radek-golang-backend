@@ -55,6 +55,37 @@ func UserPost(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
 }
 
+// UserPut PUT /users
+func UserPut(c *fiber.Ctx) error {
+	t := &users.USERS{}
+	if err := c.BodyParser(t); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(resp{
+			Status:  "error",
+			Message: err.Error(),
+		})
+	}
+	if err := users.Update(database.DB, t); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(resp{
+			Status:  "error",
+			Message: err.Error(),
+		})
+	}
+	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
+}
+
+// UserDel DELETE /users/:id
+func UserDel(c *fiber.Ctx) error {
+	id := c.Params("id")
+	if err := users.DeleteById(database.DB, id); err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(resp{
+			Status:  "error",
+			Message: err.Error(),
+		})
+	}
+	return c.Status(fiber.StatusOK).JSON(resp{Status: "ok"})
+}
+
+// UserLogin AUTHENTICATE /login
 func UserLogin(c *fiber.Ctx) error {
 	t := &users.USERS{}
 	if err := c.BodyParser(t); err != nil {
